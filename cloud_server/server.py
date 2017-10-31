@@ -1,4 +1,4 @@
-import socketserver, atexit, sys
+import socketserver, atexit, sys, socket
 from connection_handler import ConnectionHandler
 
 host = socket.gethostbyname(socket.gethostname())
