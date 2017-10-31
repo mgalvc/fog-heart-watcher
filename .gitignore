@@ -2,7 +2,10 @@
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
-__pycache__/
+cloud_server/__pycache__/
+doctor/__pycache__/
+fog_server/__pycache__/
+sensor/__pycache__/
 *.py[cod]
 *$py.class
 
