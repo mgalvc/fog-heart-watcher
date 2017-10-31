@@ -1,0 +1,202 @@
+(done) 1 - frog server se conecta ao cloud server
+
+# request
+
+{
+	"from": "frog_server",
+	"action": "auth",
+	"payload": {
+		"localization": "---"
+	}
+}
+
+# response
+
+{
+	"from": "cloud_server",
+	"status": 1,
+	"payload": {
+		"id": "---"
+	}
+}
+
+(done) 2 - frog server envia pacientes em risco para o cloud server
+
+# request 
+
+{
+	"from": "frog_server",
+	"action": "risk_patients",
+	"payload": ["nome_a", "nome_b", "nome_c"]
+}
+
+#response 
+
+{
+	"from": "cloud_server",
+	"status": 2
+}
+
+(done) 3, 4 - sensor conecta à nuvem via TCP
+
+#request
+
+{
+	"from": "sensor",
+	"action": "auth",
+	"payload": {
+		"localization": "---",
+		"name": "---"
+	}
+}
+
+#response
+
+{
+	"from": "cloud_server",
+	"status": 1,
+	"payload": {
+		"closest_frog_server": "address",
+		"id": "---"
+	}
+}
+
+(done) 5 - sensor envia dados via UDP para o frog server
+
+#request
+
+{
+	"from": "sensor",
+	"action": "patient_data",
+	"payload": {
+		"id": "---",
+		"heart_rate": "---",
+		"pressure": "---",
+		"movement": "---"
+	}
+}
+
+#response
+
+{
+	"from": "frog_server",
+	"status": 2
+}
+
+(done) 6 - médico se conecta à nuvem
+
+#request
+
+{
+	"from": "doctor",
+	"action": "auth"
+}
+
+#response
+
+{
+	"from": "cloud_server",
+	"status": 1,
+	"payload": {
+		"id": "---"
+	}
+}
+
+7 - médico requisita à nuvem pacientes em risco
+
+#request
+
+{
+	"from": "doctor",
+	"action": "risk_patients"
+}
+
+#response
+
+{
+	"from": "cloud_server",
+	"status": 3,
+	"payload": {
+		"patients": [
+			{
+				"name": "---",
+				"id": "---",
+				"risk": false
+			},
+		]
+	}
+}
+
+(done) 8 - médico escolhe paciente em risco
+
+#request
+
+{
+	"from": "doctor",
+	"action": "specific_patient",
+	"payload": {
+		"id": "---"
+	}
+}
+
+#response
+
+{
+	"from": "cloud_server",
+	"status": 3,
+	"payload": {
+		"frog_node_address": "---"
+	}
+}
+
+9 - médico se conecta ao frog server
+
+#request
+
+{
+	"from": "doctor",
+	"action": "connect",
+	"payload": {
+		"id": "---"
+	}
+}
+
+#response
+
+{
+	"from": "frog_server",
+	"payload": {
+		"heart_rate": "---",
+		"pressure": "---",
+		"movement": "---",
+		"risk": true
+	}
+}
+
+#status
+
+1 - connected
+2 - message received
+3 - success request
+4 - patient not found
+
+#mapping structure
+
+{
+	"frog_nodes": [
+		{
+			"id": "---",
+			"address": "---",
+			"localization": "---",
+			"monitoring_sensors": []
+		},
+	],
+	"sensors": [
+		{
+			"id": "---",
+			"address": "---",
+			"localization": "---",
+			"connected_to": "frog_node_id"
+		},
+	]
+}
