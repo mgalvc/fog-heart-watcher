@@ -2,7 +2,7 @@ import socketserver, json, threading, socket, time
 
 patients_in_risk = []
 
-host = "127.0.0.1"
+host = "localhost"
 cloud_port = 8000
 doctors = []
 
@@ -43,6 +43,7 @@ def send_to_doctors(data):
 	
 	for doctor in doctors:
 		if data.get("id") == doctor.get("monitoring"):
+			print("will send it to doctor {}".format(doctor.get("address")))
 			socket_to_doctor.sendto(json.dumps(data).encode(), doctor.get("address"))
 
 
@@ -55,7 +56,7 @@ class TCPConnectionHandler(socketserver.BaseRequestHandler):
 				wants_to_watch = data.get("payload").get("patient_id")
 
 				doctors.append({
-					"address": self.request.client_address,
+					"address": (self.client_address[0], 8003),
 					"monitoring": wants_to_watch
 				})
 

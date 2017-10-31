@@ -1,6 +1,6 @@
 import socket, json, random, time, sys, threading, random
 
-host = "127.0.0.1"
+host = "localhost"
 cloud_port = 8000
 tcp_frog_port = 8001
 udp_frog_port = 8002
@@ -54,12 +54,10 @@ request_fog_connection = {
 socket_to_fog.sendall(json.dumps(request_fog_connection).encode())
 
 socket_to_udp_fog = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+socket_to_udp_fog.bind(("localhost", 8003))
 
 while True:
-	try:
-		data = json.loads(socket_to_fog.recv(1024).decode())
-		print(data)
-	except:
-		pass
+	data = json.loads(socket_to_udp_fog.recv(1024).decode())
+	print(data)
 
 socket_to_cloud.close()

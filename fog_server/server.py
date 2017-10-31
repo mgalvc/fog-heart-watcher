@@ -1,7 +1,7 @@
 import socketserver, threading, atexit, socket, json, sys
 from connection_handler import TCPConnectionHandler, UDPConnectionHandler
 
-host = "127.0.0.1"
+host = "localhost"
 cloud_server_port = 8000
 tcp_port = 8001
 udp_port = 8002

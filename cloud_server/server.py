@@ -1,8 +1,8 @@
 import socketserver, atexit, sys
 from connection_handler import ConnectionHandler
 
-host = "127.0.0.1"
-port = int(sys.argv[1])
+host = "localhost"
+port = 8000
 
 @atexit.register
 def close_socket():

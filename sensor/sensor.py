@@ -1,6 +1,6 @@
 import socket, json, random, time, sys, threading, random
 
-host = "127.0.0.1"
+host = "localhost"
 cloud_port = 8000
 udp_frog_port = 8002
 name = sys.argv[1]

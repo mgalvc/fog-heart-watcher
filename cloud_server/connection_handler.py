@@ -1,8 +1,6 @@
 import json, socketserver, time
-from geopy.distance import vincenty
-from geopy.geocoders import Nominatim
-from datetime import datetime
 import config
+from datetime import datetime
 
 mapping = {
 	"fog_nodes": [],
@@ -11,6 +9,21 @@ mapping = {
 }
 
 def find_closest_fog_server(location):
+	fog_nodes = mapping.get("fog_nodes")
+
+	closest = None
+
+	for fog_node in fog_nodes:
+		distance = abs(hash(location) - hash(fog_node.get("location")))
+
+		if closest == None:
+			closest = [fog_node.get("address"), distance]
+		elif closest[1] > distance:
+			closest = [fog_node.get("address"), distance]
+
+	return closest
+
+	"""
 	fog_nodes = mapping.get("fog_nodes")
 
 	closest = None
@@ -30,6 +43,12 @@ def find_closest_fog_server(location):
 			closest = [fog_node.get("address"), distance]
 		elif closest[1] > distance:
 			closest = [fog_node.get("address"), distance]
+
+	return closest
+	
+	fog_nodes = mapping.get("fog_nodes")
+	closest = [fog_nodes[0].get("address"), 10]
+	"""
 
 	return closest
 
