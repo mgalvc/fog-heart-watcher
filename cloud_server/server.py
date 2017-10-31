@@ -1,7 +1,7 @@
 import socketserver, atexit, sys
 from connection_handler import ConnectionHandler
 
-host = "localhost"
+host = socket.gethostbyname(socket.gethostname())
 port = 8000
 
 @atexit.register
@@ -13,5 +13,5 @@ def close_socket():
 class Server(socketserver.ThreadingMixIn, socketserver.TCPServer): pass
 
 server = Server((host, port), ConnectionHandler)
-print("waiting connection...")
+print("waiting connection on {}".format(server.server_address))
 server.serve_forever()

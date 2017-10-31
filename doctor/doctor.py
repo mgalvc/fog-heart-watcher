@@ -1,6 +1,7 @@
 import socket, json, random, time, sys, threading, random
 
-host = "localhost"
+host = socket.gethostbyname(socket.gethostname())
+cloud = "172.16.103.110"
 cloud_port = 8000
 tcp_frog_port = 8001
 udp_frog_port = 8002
@@ -8,7 +9,7 @@ udp_frog_port = 8002
 # tcp connection to authentication on server
 
 socket_to_cloud = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-socket_to_cloud.connect((host, cloud_port))
+socket_to_cloud.connect((cloud, cloud_port))
 
 auth_message = {
 	"from": "doctor",
@@ -40,7 +41,7 @@ fog_node_address = response_specific_client.get("payload").get("fog_node_address
 print("patient {} is connected to fog node {}".format(patient_id, fog_node_address))
 
 socket_to_fog = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-socket_to_fog.connect((host, tcp_frog_port))
+socket_to_fog.connect((fog_node_address, tcp_frog_port))
 
 request_fog_connection = {
 	"from": "doctor",
@@ -54,7 +55,7 @@ request_fog_connection = {
 socket_to_fog.sendall(json.dumps(request_fog_connection).encode())
 
 socket_to_udp_fog = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-socket_to_udp_fog.bind(("localhost", 8003))
+socket_to_udp_fog.bind((host, 8003))
 
 while True:
 	data = json.loads(socket_to_udp_fog.recv(1024).decode())

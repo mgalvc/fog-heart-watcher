@@ -2,15 +2,16 @@ import socketserver, json, threading, socket, time
 
 patients_in_risk = []
 
-host = "localhost"
+cloud = "172.16.103.110"
 cloud_port = 8000
+
 doctors = []
 
 def send_risk_to_cloud():
 	while True:
 		if len(patients_in_risk) > 0:
 			socket_to_cloud = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-			socket_to_cloud.connect((host, cloud_port))
+			socket_to_cloud.connect((cloud, cloud_port))
 
 			message = {
 				"from": "fog_server",

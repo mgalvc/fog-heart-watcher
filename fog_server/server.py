@@ -1,7 +1,8 @@
 import socketserver, threading, atexit, socket, json, sys
 from connection_handler import TCPConnectionHandler, UDPConnectionHandler
 
-host = "localhost"
+host = socket.gethostbyname(socket.gethostname())
+cloud = "172.16.103.110"
 cloud_server_port = 8000
 tcp_port = 8001
 udp_port = 8002
@@ -10,7 +11,7 @@ location = sys.argv[1]
 # connection with cloud server
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect((host, cloud_server_port))
+sock.connect((cloud, cloud_server_port))
 
 auth_message = {
 	"from": "fog_server",
@@ -46,9 +47,9 @@ udp_server = UDPServer((host, udp_port), UDPConnectionHandler)
 tcp_thread = threading.Thread(target=tcp_server.serve_forever)
 tcp_thread.start()
 
-print("runnin tcp")
+print("runnin tcp on {}".format(tcp_server.server_address))
 
 udp_thread = threading.Thread(target=udp_server.serve_forever)
 udp_thread.start()
 
-print("runnin udp")
+print("runnin udp on {}".format(udp_server.server_address))

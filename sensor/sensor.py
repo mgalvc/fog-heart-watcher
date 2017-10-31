@@ -1,6 +1,7 @@
 import socket, json, random, time, sys, threading, random
 
-host = "localhost"
+host = socket.gethostbyname(socket.gethostname())
+cloud = "172.16.103.110"
 cloud_port = 8000
 udp_frog_port = 8002
 name = sys.argv[1]
@@ -9,7 +10,7 @@ location = sys.argv[2]
 # tcp connection to authentication on server
 
 socket_to_cloud = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-socket_to_cloud.connect((host, cloud_port))
+socket_to_cloud.connect((cloud, cloud_port))
 
 auth_message = {
 	"from": "sensor",
