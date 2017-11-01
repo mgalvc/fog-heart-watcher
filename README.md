@@ -29,7 +29,11 @@ Now, let's start a sensor. Just run:
 
 	python3 sensor/sensor.py [your_ip_address] [ip_address_of_cloud_server] [patient_name] [patient_location]
 	
-Once the sensor is running, you can change the data of this patient, typing numbers according to this model: `[heart_rate] [systolic_pressure] [diastolic_pressure] [movement]`, where movement 0 means resting and 1 means moving.
+Once the sensor is running, you can change the data of this patient, typing numbers according to this model: 
+
+	[heart_rate] [systolic_pressure] [diastolic_pressure] [movement]
+	
+There, movement 0 means resting and 1 means moving.
 
 In order to start a doctor, you need to run 
 
