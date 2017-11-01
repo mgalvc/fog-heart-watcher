@@ -2,8 +2,13 @@
 
 ## Setting up the environment
 
-- Before cloning this repository, please make sure that you have python3 and its pip version installed.
-- Clone the project, get into its root folder and run ` pip3 install -r requirements.txt`. This command will install the GeoPy library.
+Before cloning this repository, please make sure that you have python3 and its pip version installed.
+
+Then, clone the project, get into its root folder and run:
+
+	pip3 install -r requirements.txt
+
+This command will install the GeoPy library.
 
 ## Tutorial 
 
