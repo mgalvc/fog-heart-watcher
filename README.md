@@ -39,6 +39,6 @@ In order to start a doctor, you need to run
 
 	python3 doctor/doctor.py [your_ip_address] [ip_address_of_cloud_server]
 	
-Then you can type a patient's ID and you will start watching its data. You can choose the patient according to the log file or tracking the outputs of the fog server (though it's quite more challenging).
+Then you can type a patient's ID and you will start watching its data. You can choose the patient according to the `server.log` file or tracking the outputs of the fog server (though it's quite more challenging).
 
 To close any of the servers, you can press `Ctrl+C`. Just remember that it will break the entire application.
