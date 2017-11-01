@@ -8,7 +8,7 @@
 ## Tutorial 
 
 - First, you must run the cloud server that requires an IP Address as an argument, according to this example: 
-`python3 cloud_server/server.py 127.0.0.1`. Just change "127.0.0.1" by your IP Address.
+`python3 cloud_server/server.py 127.0.0.1`. Just change "127.0.0.1" to your IP Address.
 - Please open the server.log file in order to watch what is going to happen on the cloud server. You can do this running `tail -f server.log`.
 - Before the next steps, please open the file `fog_server/connection_handler.py` and change the variable `cloud`, right in line 7, putting there the IP Address where you intend to run the fog server.
 - Then, run the fog server passing three more arguments just like the following: 
