@@ -9,6 +9,9 @@ sensor/__pycache__/
 *.py[cod]
 *$py.class
 
+protocol.json
+server.log
+
 # C extensions
 *.so
 

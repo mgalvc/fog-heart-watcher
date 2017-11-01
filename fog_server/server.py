@@ -1,15 +1,19 @@
 import socketserver, threading, atexit, socket, json, sys
 from connection_handler import TCPConnectionHandler, UDPConnectionHandler
 
-host = socket.gethostbyname(socket.gethostname())
-cloud = "172.16.103.110"
+# your IP address in the first argument
+host = sys.argv[1]
+# IP address of cloud server in the second argument
+cloud = sys.argv[2]
+
 cloud_server_port = 8000
 tcp_port = 8001
 udp_port = 8002
-location = sys.argv[1]
 
-# connection with cloud server
+# your location in the third argument
+location = sys.argv[3]
 
+# TCP connection with cloud server
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect((cloud, cloud_server_port))
 
@@ -33,17 +37,18 @@ sock.close()
 def close_socket():
 	""" shutdown method to close the sockets """
 	print("closing server socket...")
+	
 	tcp_server.server_close()
 	udp_server.server_close()
 
-#server to connect with doctor and patient
-
+# servers to handle requests from doctor and patient
 class TCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer): pass
 class UDPServer(socketserver.ThreadingMixIn, socketserver.UDPServer): pass
 
 tcp_server = TCPServer((host, tcp_port), TCPConnectionHandler)
 udp_server = UDPServer((host, udp_port), UDPConnectionHandler)
 
+# threads to run both servers in parallel
 tcp_thread = threading.Thread(target=tcp_server.serve_forever)
 tcp_thread.start()
 
