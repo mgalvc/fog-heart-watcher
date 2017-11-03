@@ -1,4 +1,4 @@
-import socket, json, random, time, sys, threading, random
+import socket, json, random, time, sys, threading, random, atexit
 
 # your IP address in the first argument
 host = sys.argv[1]
